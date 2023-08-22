@@ -42,7 +42,7 @@ def sendline():
 #schedule.every(1).minutes.do(sendline)
 # 每個星期日的13:10分執行任務
 
-schedule.every().day.at("03:10").do(sendlin)
+schedule.every().day.at("03:15").do(sendline)
 while True:
     schedule.run_pending()
     time.sleep(1)
