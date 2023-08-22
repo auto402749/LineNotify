@@ -22,7 +22,7 @@ def sendline():
 
 
 
-'''
+
   #Line Notify權杖設定
   url = 'https://notify-api.line.me/api/notify'
   token = 'vvr0RmVaZBqfUHhOohASfxRBqcqNtmntFOhi1JYB3pZ'
@@ -37,7 +37,7 @@ def sendline():
     'stickerId':'10856'
   }
   data = requests.post(url, headers=headers, data=data)   # 使用 POST 方法
-'''
+
 
 #schedule.every(1).minutes.do(sendline)
 # 每個星期日的13:10分執行任務
