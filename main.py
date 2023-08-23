@@ -56,7 +56,7 @@ def sendline():
 
   #Line Notify權杖設定
   url = 'https://notify-api.line.me/api/notify'
-  token = 'vvr0RmVaZBqfUHhOohASfxRBqcqNtmntFOhi1JYB3pZ'
+  token = '2UMEnFRpRfwqZPsYhIlF2Om9DAX8EzFQF4AE2nblMIx'
 
   headers = {
     'Authorization': 'Bearer ' + token    # 設定權杖
