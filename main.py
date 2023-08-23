@@ -22,21 +22,21 @@ def sendline():
   title2 = datas.find('h2')
   msg += '\n'
   msg += title.text
-  print(title.text,end="")
+  #print(title.text,end="")
 
   #漲跌狀況
   price = updown.find('h2')
   msg += price.text + '\n'
-  print(price.text)
+  #print(price.text)
 
 
   msg += "--------------------------------------------"+'\n'
-  print("-----------------------------------------------------------")
+  #print("--------------------------------------------")
 
   msg += title2.text + ":"+"\n"
   msg += '\n'
-  print(title2.text + ":")
-  print()
+  #print(title2.text + ":")
+  #print()
 
   items = datas.find_all('li')
 
@@ -45,18 +45,18 @@ def sendline():
     #print(items[i].text,end="")
     h3_item = items[i].find("h3")
     msg += h3_item.text.strip()
-    print(h3_item.text.strip(),end="")      #strip():移除字串頭尾指定的字符(默認為空格)
-    h3_item.extract()               #extract():把不要的標籤淬出或是移除
+    #print(h3_item.text.strip(),end="")      #strip():移除字串頭尾指定的字符(默認為空格)
+    h3_item.extract()                        #extract():把不要的標籤淬出或是移除
     msg += items[i].text.strip()+" 元/升"+"\n"
     msg += "\n"
-    print(items[i].text.strip()+" 元/升")
-    print()
-  #print(msg)
+    #print(items[i].text.strip()+" 元/升")
+    #print()
+  print(msg)
 
 
   #Line Notify權杖設定
   url = 'https://notify-api.line.me/api/notify'
-  token = '2UMEnFRpRfwqZPsYhIlF2Om9DAX8EzFQF4AE2nblMIx'
+  token = 'vvr0RmVaZBqfUHhOohASfxRBqcqNtmntFOhi1JYB3pZ'
 
   headers = {
     'Authorization': 'Bearer ' + token    # 設定權杖
@@ -64,10 +64,11 @@ def sendline():
 
   data = {
     'message':msg,       # 設定要發送的訊息
-    "stickerPackageId":"789",
-    'stickerId':'10856'
+    "stickerPackageId":"6325",
+    'stickerId':'10979917'
   }
   data = requests.post(url, headers=headers, data=data)   # 使用 POST 方法
+
 
 schedule.every().day.at("02:15").do(sendline)
 #每個星期日的13:10分執行任務(線上編譯器為GMT時間，台灣為GMT+8，故設定上要-8)
