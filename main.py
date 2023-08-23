@@ -6,26 +6,57 @@ import time
 
 def sendline():
   gas_url = 'https://gas.goodlife.tw/'
-  gas_web = requests.get(gas_url)  #爬取網頁資料
+  gas_web = requests.get(gas_url)   #爬取網頁資料
   gas_web.encoding = 'utf-8'
   soup = BeautifulSoup(gas_web.text, "html.parser")
+  msg=""
 
   #找到價格區間
-  gas_datas = soup.find(id='gas-price')
+  updown = soup.find(id='gas-price')
+  datas = soup.find(id='cpc')
+
+  #print(updown)
+  #print(datas)
   #調漲期間
-  gas_title = gas_datas.find('p')
+  title = updown.find('p')
+  title2 = datas.find('h2')
+  msg += '\n'
+  msg += title.text
+  print(title.text,end="")
+
   #漲跌狀況
-  gas_price = gas_datas.find('h2')
-  msg = str(gas_title.text)+str(gas_price.text)
-  print(msg)
-  print(time.ctime(time.time()))
+  price = updown.find('h2')
+  msg += price.text + '\n'
+  print(price.text)
 
 
+  msg += "--------------------------------------------"+'\n'
+  print("-----------------------------------------------------------")
+
+  msg += title2.text + ":"+"\n"
+  msg += '\n'
+  print(title2.text + ":")
+  print()
+
+  items = datas.find_all('li')
+
+  for i in range(len(items)):
+
+    #print(items[i].text,end="")
+    h3_item = items[i].find("h3")
+    msg += h3_item.text.strip()
+    print(h3_item.text.strip(),end="")      #strip():移除字串頭尾指定的字符(默認為空格)
+    h3_item.extract()               #extract():把不要的標籤淬出或是移除
+    msg += items[i].text.strip()+" 元/升"+"\n"
+    msg += "\n"
+    print(items[i].text.strip()+" 元/升")
+    print()
+  #print(msg)
 
 
   #Line Notify權杖設定
   url = 'https://notify-api.line.me/api/notify'
-  token = 'vvr0RmVaZBqfUHhOohASfxRBqcqNtmntFOhi1JYB3pZ'
+  token = '2UMEnFRpRfwqZPsYhIlF2Om9DAX8EzFQF4AE2nblMIx'
 
   headers = {
     'Authorization': 'Bearer ' + token    # 設定權杖
@@ -39,10 +70,9 @@ def sendline():
   data = requests.post(url, headers=headers, data=data)   # 使用 POST 方法
 
 
-#schedule.every(1).minutes.do(sendline)
-# 每個星期日的13:10分執行任務
-
-schedule.every().day.at("03:15").do(sendline)
+schedule.every().day.at("02:15").do(sendline)
+#每個星期日的13:10分執行任務(線上編譯器為GMT時間，台灣為GMT+8，故設定上要-8)
+#schedule.every().sunday.at("05:10").do(sendline)
 while True:
-    schedule.run_pending()
-    time.sleep(1)
+  schedule.run_pending()
+  time.sleep(1)
