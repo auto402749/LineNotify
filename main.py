@@ -72,7 +72,7 @@ def sendline():
 
 #schedule.every().day.at("02:15").do(sendline)
 #每個星期日的13:30分執行任務(線上編譯器為GMT時間，台灣為GMT+8，故設定上要-8)
-schedule.every().sunday.at("06:00").do(sendline)
+schedule.every().sunday.at("11:25").do(sendline)
 while True:
   schedule.run_pending()
   time.sleep(1)
