@@ -56,7 +56,7 @@ def sendline():
 
   #Line Notify權杖設定
   url = 'https://notify-api.line.me/api/notify'
-  token = 'hbJvV0cpvjdAF270DO9zil9sXwjIhUs0ddGcjv80FlR'
+  token = 'vvr0RmVaZBqfUHhOohASfxRBqcqNtmntFOhi1JYB3pZ'
 
   headers = {
     'Authorization': 'Bearer ' + token    # 設定權杖
@@ -70,9 +70,9 @@ def sendline():
   data = requests.post(url, headers=headers, data=data)   # 使用 POST 方法
 
 
-#schedule.every().day.at("02:15").do(sendline)
+schedule.every(2).minute.do(sendline)
 #每個星期日的13:30分執行任務(線上編譯器為GMT時間，台灣為GMT+8，故設定上要-8)
-schedule.every().sunday.at("05:30").do(sendline)
+#schedule.every().sunday.at("05:30").do(sendline)
 while True:
   schedule.run_pending()
   time.sleep(1)
